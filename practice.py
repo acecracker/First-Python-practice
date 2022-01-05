@@ -630,3 +630,230 @@
 
 
 # 7-3 기본값
+# def profile(name, age, main_lang):
+#     print("이름 : {0}\t나이 : {1}\t주 사용 언어 : {2}".format(name, age, main_lang))
+    
+# profile("유재석", 20, "파이썬") # 유재석씨(20세)의 주 사용 언어는 파이썬
+# profile("김태호", 25, "자바") # 김태호씨(25세)의 주 사용 언어는 자바
+
+# def profile(name, age=17, main_lang="파이썬"): # 전달값을 따로 받지 않을때 기본으로 사용할 값
+#     print("이름 : {0}\t나이 : {1}\t주 사용 언어 : {2}".format(name, age, main_lang))
+        
+# profile("유재석")
+# profile("김태호")
+
+
+# # 7-4 키워드 인자
+# def profile(name, age, main_lang): # 키워드 인자 : name, age, main_lang
+#     print(name, age, main_lang)
+
+# # profile("유재석", 20, "파이썬")
+# # profile("김태호", 25, "자바")
+
+# profile(name="유재석", main_lang="파이썬", age=20)
+# profile(main_lang="자바", age=25, name="김태호")
+
+
+#7-5 가변인자
+# def profile(name, age, lang1, lang2, lang3, lang4, lang5):
+#     print("이름 : {0}\t나이 : {1}\t".format(name, age), end=" ") # 문장 출력 후 줄바꿈 대신 띄어쓰기
+#     print(lang1, lang2, lang3, lang4, lang5)
+
+# profile("유재석", 20, "Python", "Java", "C", "C++", "C#")
+# profile("김태호", 25, "Kotlin", "Swift", "", "", "")
+
+# def profile(name, age, *language): # 언어 정보를 전달하고 싶은 갯수 만큼 전달 가능    
+#     print("이름 : {0}\t나이 : {1}\t".format(name, age), end=" ")
+    
+#     # print(type(language)) # tuple
+#     for lang in language:
+#         print(lang, end=" ") # 언어들을 모두 한 줄에 표시
+#     print() # 줄바꿈 목적
+
+
+# #7-6 전역변수 지역변수 
+# gun = 10 # 총 10자루  전역변수
+
+# def checkpoint(soldiers): # 경계근무 나가는 군인 수
+#     # gun = 20   # 함수내 지역변수
+#     global gun   # 함수네에서 전역변수를 쓸 경우
+#     gun = gun - soldiers # 전체 총에서 경계근무 나가는 군인 수만큼 뺀 잔여 총
+#     print("[함수 내] 남은 총 : {0}".format(gun))
+
+# def checkpoint_ret(gun,soldiers):
+#     gun = gun - soldiers
+#     print("[함수 내] 남은 총 : {0}".format(gun))
+#     return gun
+
+
+# gun = checkpoint_ret(gun, 2)
+# print("남은 총:{0}".format(gun))
+
+# print("전체 총 : {0}".format(gun)) # 10 자루
+# checkpoint(2) # 2명이 경계 근무 출발
+# print("남은 총 : {0}".format(gun)) # 몇 자루?
+
+
+# 퀴즈)_ 표준 체중을 구하는 프로그램을 작성하시오
+#  * 표준 체중 : 각 개인의 키에 적당한 체중
+# (성별에 따른 공식)
+# 남자 : 키(m) X 키(m) X 22
+# 여자 : 키(m) X 키(m) X 21
+
+# 조건1 : 표준 체중은 별도의 함수 내에서 계산
+#         * 함수명 : std_weight
+#         * 전달값 : 키(height), 성별(gender)
+# 조건2 : 표준 체중은 소수점 둘째자리까지 표시
+#(출력 예제)
+# 키 175cm 남자의 표준 체중은 67.38kg 입니다.
+
+# def std_weight(height, gender): # 키 m 단위(실수), 성별 "남자" / "여자"
+#     if gender=="남자":
+#         return height * height * 22
+#     else:
+#         return height * height *21
+
+# height = 175 # cm 단위
+# gender ="남자" 
+# weight = round(std_weight(height / 100, gender),2)
+# print("키 {0}cm {1}의 표준 체중은 {2}kg 입니다.".format(height, gender, weight))
+
+
+
+# 8-1 표준 입출력
+# import sys
+# print("Python","Java", sep=",",end="?")    # sep 는 "Python"요부분"Java" 부분의 정의, end는 끝부분을 줄바꿈 대신 지정하는 값으로 정의
+# print("무엇이 더 재밌을까요?")
+
+# print("Python","Java", file=sys.stdout)   
+# print("Python","Java", file=sys.stderr)   # 비주얼 스튜디오 코드에서는 정상적으로 나오는 것으로 보이지만, 일반 상황에서는 에러 로그에 기록됨
+
+#시험성적
+# scores = {"수학":0,"영어":50,"코딩":100}
+# for subject, scores in scores.items():
+#     #print(subject, scores)
+#     print(subject.ljust(8), str(scores).rjust(4), sep=":")
+
+
+# 은행 대기순번표 
+# #001,002,003,...
+# for num in range(1,21):
+#     print("대기번호 :" +str(num).zfill(3))   # .zfill(3) 메소드는 자리공간 3자리를 확보하고 자리에 데이터가 없는 경우 0으로 채운다.
+
+
+# 사용자 표준 입력과 코딩 입력시 주의사항 
+# answer = input("아무값이나 입력하세요:")   # 사용잡 입력을 받게 되면 항상 문자(열)로 입력을 받게 된다는 점 주의, (숫자로 변경 필요시 주의)
+# # answer = 10   # 사용자 입력이 아닌 코딩시 입력시에는 int 형으로 입력이 된다는 점에 주의
+# print(type(answer))  # 변수의 타입을 확인하고 싶을 때 .type()메소드
+# print("입력하신 값은"+answer + "입니다.")
+
+
+
+# 8-2 다양한 출력포맷
+
+# # 빈 자리는 빈공간으로 두고, 오른쪽 정렬을 하되, 총 10자리 공간을 확보
+# print("{0: >10}".format(500))
+
+# #양수일 땐 +로 표시, 음수일 땐 -로 표시
+# print("{0: >+10}".format(500)) 
+# print("{0: >+10}".format(-500))
+
+# #왼쪽 정렬하고, 빈칸으로 _로 채움
+# print("{0:_>10}".format(-500))
+
+# #3자리마다 콤마를 찍어주기
+# print("{0:,}".format(100000000000))
+
+# #3자리마다 콤마를 찍어주기, +-부호도 붙이기
+# print("{0:+,}".format(100000000000))
+# print("{0:+,}".format(-100000000000))
+
+#3자리마다 콤마를 찍어주기, 부호도 붙이고, 자릿수 확보하기
+# print("{0:^<+30,}".format(-100000000000)) #(좌측정렬에 30자리공백은 ^표 처리)
+# print("{0:*>+30,}".format(-100000000000)) #(우측정렬에 30자리공백은 *표처리)
+
+# #소수점 출력
+# print("{0:f}".format(5/3))  # 5/3  3분의5를 소수점으로 출력
+
+# #소수점 특정 자리수 까지만 표시 (소수점 3째 자리에서 반올림)
+# print("{0:.2f}".format(5/3))  
+
+
+# 8-3 파일 입출력
+# 파일을 열고 내용쓰기
+# score_file = open("score.txt", "w", encoding="utf8")  # "w" 용도로 열경우는 쓰기 용도로 여는 것임
+# print("수학:0", file=score_file)   # print() 사용시 자동으로 줄바꿈이 된다.
+# print("영어:50", file=score_file)  
+# score_file.close()   # 파일을 열었으면 필히 닫아준다.
+
+# 기존파일을 열고 내용 추가 하기
+# score_file = open("score.txt", "a", encoding="utf8")    # "a" 로 여는 것은 append 로 여는 것임 "w"로 열경우 파일이 있으므로 덮어쓰기됨
+# score_file.write("과학 : 80")      #
+# score_file.write("\n코딩 : 100")   #print() 메소드의 경우 줄바꿈이 들어있으나, write()메소드는 줄바꿈이 기본이 아니므로 명시적으로 \n 줄바꿈 넣어주기
+# print("\ntest:50", file=score_file)   #위에서 줄바꿈이 안되었기 때문에 줄바꿈을 넣어주고 테스트 해봄
+# print("test:1", file=score_file)      # print()는 줄 바꿈이 되기 때문에 줄바꿈이 실행되어 저장됨
+# print("test:2", file=score_file)
+# print("test:3", file=score_file)
+# score_file.close()     #파일사용후 닫아주기는 꼭 잊지 말자
+
+# 파일을 열고 읽기
+# 1 한번에 다 읽어서 보여주는 방법
+# score_file = open("score.txt", "r", encoding="utf8")
+# print(score_file.read())    # 한번에 읽어서 보여주기
+# score_file.close
+
+# 한줄씩 읽어서 처리하기 (아래의 경우는 읽어야 하는 양을 알아서 간단하나..)
+# score_file = open("score.txt","r", encoding="utf8")
+# print(score_file.readline(), end="") #줄별로 읽기, 한줄 읽고 커서는 다음 줄로 이동 / (end="") end옵션을 빼면 줄바꿈을 해서 표기
+# print(score_file.readline(), end="")
+# print(score_file.readline(), end="")
+# print(score_file.readline(), end="")
+# score_file.close()
+
+# 한줄씩 읽어서 처리하나 파일이 총 몇줄인지 모를 경우 while 루푸문을 이용해서 처리
+# score_file = open("score.txt","r", encoding="utf8")
+# while True:
+#     line = score_file.readline()
+#     if not line:
+#         break
+#     # print(line,)       # 줄바꿈을 하려는 경우 end 사용하지 않음
+#     print(line, end="")  # 줄바꿈을 하지 않으려는 경우 end="" 추가
+# score_file.close()
+
+
+# 리스트 형태로 저장해서 출력하기
+# score_file = open("score.txt","r", encoding="utf8")
+# lines = score_file.readlines()  #  list 형태로 저장    .readline 이 아닌 .readlins 로 메소드를 사용 (모든 라인을 가지고 와서 lines list 에 저장)
+# for line in lines:    # lines 리스트에서 한줄씩 가져와서 출력해주기
+#     print(line, end="")  #줄바꿈을 하지 않으려는 경우 end
+# score_file.close()
+
+
+# 8-4 picke  피클 라이브러리 (프로그램에서 우리가 사용하는 데이터를 파일 형태로 주고 받는 방식)
+# import pickle
+# profile_file = open("profile.pickle", "wb")  # w->쓰기형태로 열기 b-> 바이너리로 사용 (피클은 항상 바이너리로 사용)
+# profile ={"이름":"박명수", "나이":30, "취미":["축구","골프","코딩"]}
+# print(profile)
+# pickle.dump(profile, profile_file) #profile 에 있는 정보를 file 에 저장
+# profile_file.close()
+
+# pickle 파일 데이터 가져와서 출력하기
+# import pickle
+# profile_file = open("profile.pickle", "rb")  # 바이너리 데이터 읽기로 열기 rb
+# profile = pickle.load(profile_file)  # file 에 있는 정보를 profile 에 불러오기
+# print(profile)
+# profile_file.close()
+
+
+# 8-5 with 사용하기
+# import pickle
+# with open("profile.pickle", "rb") as profile_file:  # profile_file 이라는 변수에 profile.pickle 파일을 바이너리 읽기로 열어서 넣어줌.
+#     print(pickle.load(profile_file))                # with 를 사용시 파일을 닫아줄 필요가 없어 좀더 편리하다.
+
+# pickle 을 사용하지 않고 일반 파일을 with 로 쓰고 읽기
+# with open("study.txt", "w", encoding="utf8") as study_file: # study_file 변수에 study.txt 파일 열어서 개체를 준비시킴 (파일열고 쓸 준비)
+#     study_file.write("파이썬을 열심히 공부하고 있어요.")  # 열린변수 study_file 변수에 데이터 쓰기  (파일을 따로 닫지 않아도 됨)
+
+# 읽기
+with open("study.txt","r", encoding="utf8") as study_file:   # 읽기 모드로 study.txt 파일을 열어서 study_file 에 담기
+    print(study_file.read())             # 담은 데이터를 읽어서 print()  마찬가지로 파일을 따로 닫을 필요가 없어서 달랑 두줄이면 파일처리 가능

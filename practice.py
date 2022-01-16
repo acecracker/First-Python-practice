@@ -855,5 +855,81 @@
 #     study_file.write("파이썬을 열심히 공부하고 있어요.")  # 열린변수 study_file 변수에 데이터 쓰기  (파일을 따로 닫지 않아도 됨)
 
 # 읽기
-with open("study.txt","r", encoding="utf8") as study_file:   # 읽기 모드로 study.txt 파일을 열어서 study_file 에 담기
-    print(study_file.read())             # 담은 데이터를 읽어서 print()  마찬가지로 파일을 따로 닫을 필요가 없어서 달랑 두줄이면 파일처리 가능
+# with open("study.txt","r", encoding="utf8") as study_file:   # 읽기 모드로 study.txt 파일을 열어서 study_file 에 담기
+#     print(study_file.read())             # 담은 데이터를 읽어서 print()  마찬가지로 파일을 따로 닫을 필요가 없어서 달랑 두줄이면 파일처리 가능
+
+
+# 8-6  퀴즈 파일처리
+# 당신의 회사에서는 매주 1회 작성해야 하는 보고서가 있습니다.
+# 보고서는 항상 아래와 같은 형태로 출력되어야 합니다.
+#  - X주차 주간보고-
+# 부서 :
+# 이름 :
+# 업무요약 :
+
+# 1주차부터 50주차까지의 보고서 파일을 만드는 프로그램을 작성하시오.
+# 조건 : 파일명은 '1주차.txt', '2주차.txt',... 와 같이 만듭니다.
+# for i in range(1,51):
+#     with open(str(i) + "주차.txt", "w", encoding="utf8") as report_file:
+#         report_file.write("- {0}주차 주간보고 -".format(i))
+#         report_file.write("\n부서 :")
+#         report_file.write("\n이름 :")
+#         report_file.write("\n업무요약 :")
+
+
+
+# 9-1 클래스  
+# 마린 : 공격 유닛, 군인. 총을 쏠 수 있음
+# name = "마린" # 유닛의 이름
+# hp = 40 # 유닛의 체력
+# damage = 5 # 유닛의 공격력
+
+# print("{} 유닛이 생성되었습니다.".format(name))
+# print("체력 {0}, 공격력 {1}\n".format(hp, damage))
+
+
+# # 탱크 : 공격 유닛, 탱크. 포를 쏠 수 있는데, 일반 모드 / 시즈 모드
+# tank_name = "탱크"
+# tank_hp = 150
+# tank_damage = 35
+
+# print("{} 유닛이 생성되었습니다.".format(tank_name))
+# print("체력 {0}, 공격력 {1}\n".format(tank_hp, tank_damage))
+
+
+# # 공격 함수
+# def attack(name, location, damage):
+# 	print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(name, location, damage))
+
+# attack(name, "1시" , damage) # 마린 공격 명령
+# attack(tank_name, "1시" , tank_damage) # 탱크 공격 명령
+
+
+# 탱크2 새로 추가
+# tank2_name = "탱크"
+# tank2_hp = 150
+# tank2_damage = 35
+
+# print("{} 유닛이 생성되었습니다.".format(tank2_name))
+# print("체력 {0}, 공격력 {1}\n".format(tank2_hp, tank2_damage))
+
+# # 공격 함수
+# def attack(name, location, damage):
+# 	print("{0} : {1} 방향으로 적군을 공격 합니다. [공격력 {2}]".format(name, location, damage))
+
+# attack(name, "1시" , damage) # 마린 공격 명령
+# attack(tank_name, "1시" , tank_damage) # 탱크 공격 명령
+# attack(tank2_name, "1시" , tank2_damage) # 탱크2 공격 명령
+
+
+class Unit:
+    def __init__(self, name, hp, damage):
+        self.name = name # 멤버변수 name 에 전달값 name 저장
+        self.hp = hp
+        self.damage = damage
+        print("{0} 유닛이 생성되었습니다.".format(self.name))
+        print("체력 {0}, 공격력 {1}".format(self.hp, self.damage))
+
+marine1 = Unit("마린", 40, 5) # 마린1 생성. 전달값으로 name, hp, damage 를 전달
+marine2 = Unit("마린", 40, 5) # 마린2 생성
+tank = Unit("탱크", 150, 35) # 탱크 생성
